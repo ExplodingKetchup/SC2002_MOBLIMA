@@ -24,20 +24,24 @@ public class BookMyShowApp {
 		int option = 0;
 		in = new Scanner(System.in);
 		do {
-			System.out.println();
-        	System.out.println("----------------MOBLIMA MAIN MENU!----------------");
-        	System.out.println("| 01: Admin Login                               |");
-        	System.out.println("| 02: View All Movies                           |");
-        	System.out.println("| 03: Search A Movie                            |");
-        	System.out.println("| 04: View Top 5 Movies		                    |");
-        	System.out.println("| 05: Booking Menu                              |");
-        	System.out.println("| 06: Rate/Review A Movie                       |");
-        	System.out.println("| 07: Initialize/Show Example                   |");
-        	System.out.println("| 11: Create Show                               |");
-        	System.out.println("--------------------------------------------------");
-        	System.out.println();
-        	while(true) {
+			while(true) {
+	            System.out.println();
+	            System.out.println("-----------------MOBLIMA MAIN MENU---------------");
+	        	System.out.println("| 01: View Movies                               |");
+	        	System.out.println("| 02: View Showtimes                            |");
+	        	System.out.println("| 03: Review/Rate Movies                        |");
+	        	System.out.println("| 04: Show all Movies                           |");
+	        	System.out.println("| 05: Initialize/Show Example                   |");
+	        	System.out.println("| 06: View Top 5 Movies                         |");
+	        	System.out.println("| 07: Booking  Menu                             |");
+	        	System.out.println("| 08: Show Booking History                      |");
+	        	System.out.println("| 09: Search Movie                              |");
+	        	System.out.println("| 10: Create Show                               |");
+				System.out.println("| 11: ADMIN VIEW                                |");
+	            System.out.println("-------------------------------------------------");
+	            System.out.println();
         		System.out.print("Main Menu - Enter option ('-1' to exit):");
+        		
         		try {
         			option = in.nextInt();
         		}catch(InputMismatchException e) {
@@ -45,6 +49,7 @@ public class BookMyShowApp {
         			in.next();
         			continue;
         		}
+        		
         		switch (option) {
         		case -1:
         			System.out.println("Goodbye!");

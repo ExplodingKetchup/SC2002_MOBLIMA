@@ -1,25 +1,23 @@
 package Moblima;
 
-import java.io.IOException;
-import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 /**
  * Controller of the admin module. Creates and delegates tasks to other classes.
  * @author Nghia Nguyen
  * @version 1.0
  */
-public class Admin {
+public class Admin implements LoginObserver {
     private static Admin instance = null;
-    private StaffLoginForm loginUI;
+    private LoginPage loginUI;
     private AdminForm adminUI;
     private SettingsController settingsController;
-    private movieHandler movieHandler;
+    private BookMyShowInterface showManager;
 
     /**
      * Constructor for Admin.
      */
     private Admin() {
-        loginUI = new StaffLoginForm(new StaffAccount(new StaffAccountFileIO_I()));
         adminUI = new AdminForm(this);
         settingsController = new SettingsController(new SettingsForm());
     }
@@ -39,25 +37,44 @@ public class Admin {
      * Start the admin module.
      */
     public void start() {
-        if (!login()) return;
-        adminUI.show();
+        //adminUI.show();
+        login();
     }
 
     /**
      * Launch the login function.
      * @return <code>true</code> if the login is successful, <code>false</code> otherwise.
      */
-    private boolean login() {
-        return loginUI.show();
+    private void login() {
+        IDandPasswords idandPasswords = new IDandPasswords();
+		loginUI = new LoginPage(idandPasswords.getLoginInfo());
+        loginUI.addLoginObserver(this);
     }
 
     /**
-     * Log out and restart the admin module.
+     * Launch the admin UI when the login is successful.
      */
-    public void logout() {
+    public void loginSuccess() {
+        adminUI.show();
+    }
+
+    /**
+     * Exit the admin module.
+     */
+    public void exit() {
+        instance = null;
         loginUI = null;
         adminUI = null;
-        start();
+        settingsController = null;
+        BookMyShowApp.main(null);
+    }
+
+    /**
+     * Inject a BookMyShow object into the admin module.
+     * @param bookMyShow the <code>BookMyShow</code> object to be injected.
+     */
+    public void attachBookMyShow(BookMyShowInterface bookMyShow) {
+        this.showManager = bookMyShow;
     }
 
     /**
@@ -67,33 +84,23 @@ public class Admin {
         settingsController.launch();
     }
 
-    public void writeMovieToTextFile(String fileName) throws IOException{
-        Scanner in = new Scanner(System.in);
-        String movieName = "";
-        String movieStatus = "";
-        String movieDirector = "";
-        String movieSynopsis = "";
-        String movieCasts = "";
-        //ArrayList<String> movieCasts = new ArrayList<>();
-        System.out.print("Enter full name of movie: ");
-        movieName = in.nextLine();
-        System.out.print("Enter status of movie (Coming Soon, Now Showing): ");
-        movieStatus = in.nextLine();
-        System.out.print("Enter director of movie: ");
-        movieDirector = in.nextLine();
-        System.out.print("Enter synopsis of movie: ");
-        movieSynopsis = in.nextLine();
-        System.out.print("Enter casts of movie (e.g. Steve Rogers, Borat, Mr Bean): ");
-        movieCasts = in.nextLine();
-        /*while(in.nextLine() != ""){
-            movieCastsString = in.nextLine();
-            movieCasts.add(movieCastsString);
-        }*/
-        //FileWriter movieDatabase = new FileWriter(fileName);
-        //PrintWriter write = new PrintWriter(movieDatabase);
-        BookMyShow bookMyShow = new BookMyShow();
-        Movie addNewMovie = new Movie(movieName, movieStatus, movieDirector, movieSynopsis, movieCasts, bookMyShow.getMovieDatabase());
-        //write.println(movieCasts);
-        //write.close();
+    public void createMovie() {
+        showManager.createMovie("MovieList.txt");
+    }
+
+    public void updateMovie() {
+        showManager.updateMovie("MovieList.txt");
+    }
+
+    public void removeMovie() {
+        showManager.removeMovie("MovieList.txt");
+    }
+
+    public void showAllMovies() {
+        showManager.showAllMovies();
+    }
+
+    public void createShow() {
+        showManager.createShow();
     }
 }

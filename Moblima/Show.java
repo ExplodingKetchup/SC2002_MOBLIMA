@@ -49,12 +49,13 @@ public class Show {
     public void updateShow(){
     }
 
-    public synchronized Ticket bookTicket(User user, Seats seats){
+    public synchronized Ticket bookTicket(User user, Seats seats, double price){
         Ticket ticket = new Ticket();
         ticket.setOwner(user.getName());
         ticket.setBookedShow(this);
         ticket.setBookingTime(new Date());
         ticket.setSeat(seats);
+        ticket.setPrice(price);
         System.out.println("Successfully booked");
         user.bookingHistory.add(ticket);
         this.movie.addticket(ticket);

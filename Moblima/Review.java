@@ -4,7 +4,7 @@ public class Review {
 	private String Review;
 	private User user;
 	
-	Review(String review,User user) {
+	public Review(String review,User user) {
         this.Review = review;
         this.user=user;
     }
@@ -25,6 +25,6 @@ public class Review {
 
     @Override
     public String toString() {
-        return Review;
+        return "User: "+ this.user.getName()+'\n'+Review;
     }
 }

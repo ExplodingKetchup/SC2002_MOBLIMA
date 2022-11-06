@@ -11,12 +11,20 @@ public class Ticket {
 	    private Seats seat_no;
 	    private Show bookedShow;
 		private Cinema cinemaSelected;
-
+		private Double price;
 
 	    public Ticket() {
 	        idCounter += 1;
 	        this.id = idCounter;
 	    }
+
+		public void setPrice(Double price){
+			this.price = price;
+		}
+
+		public Double getPirce(){
+			return this.price;
+		}
 
 		public void setCinema(Cinema cinemaSelected){
 			this.cinemaSelected = cinemaSelected;

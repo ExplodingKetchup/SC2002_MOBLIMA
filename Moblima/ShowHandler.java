@@ -38,11 +38,13 @@ public class ShowHandler {
             temp = shows.get(i);
             System.out.println(temp.getID() + ". " + temp.getMovie().getName());
             System.out.println("Show time: " + temp.getShowTime());
+            System.out.println("Hall Type: " + temp.getCinema().getCinemaClass());
             System.out.println("Location: " + temp.getCinema().getCineplex().getLocation());
+            System.out.println();
         }
     }
 
-    public ArrayList<Show> printAllShowsByLocation(Cineplex c){
+    public ArrayList<Show> getAllShowsByLocation(Cineplex c){
         ArrayList<Show> results = new ArrayList<>();
         for (Show s : this.allShows){
             if (c.getLocation() == s.getCinema().getCineplex().getLocation()){

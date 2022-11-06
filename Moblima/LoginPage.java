@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -22,7 +23,10 @@ public class LoginPage implements ActionListener{
     JLabel userIDLabel = new JLabel("userID: ");
     JLabel userPasswordLabel = new JLabel("password: ");
     JLabel messageLabel = new JLabel("Admin Login");
+
+    LoginObserver loginObservers[] = new LoginObserver[10];
     HashMap<String,String> logininfo = new HashMap<String,String>();
+    BookMyShow bookMyShow = new BookMyShow();
 
     LoginPage(HashMap<String,String> loginInfoOriginal){
 
@@ -70,15 +74,15 @@ public class LoginPage implements ActionListener{
             String password = String.valueOf(userPasswordField.getPassword());
 
             if(logininfo.containsKey(userID)){
+                // Login success
                 if(logininfo.get(userID).equals(password)){
+
                     JFrame popUpFrame = new JFrame();
                     JOptionPane.showMessageDialog(popUpFrame, "Login Successful!");
                     frame.dispose();
-                    try {
-                        AdminPage adminPage = new AdminPage();
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
+
+
+                    notifyLoginObservers();
                 }
                 else{
                     messageLabel.setForeground(Color.red);
@@ -88,6 +92,32 @@ public class LoginPage implements ActionListener{
             else{
                 messageLabel.setForeground(Color.red);
                 messageLabel.setText("Username not found");
+            }
+        }
+    }
+
+    public void addLoginObserver(LoginObserver loginObserver){
+        for(int i=0;i<loginObservers.length;i++){
+            if(loginObservers[i]==null){
+                loginObservers[i] = loginObserver;
+                break;
+            }
+        }
+    }
+
+    public void removeLoginObserver(LoginObserver loginObserver){
+        for(int i=0;i<loginObservers.length;i++){
+            if(loginObservers[i]==loginObserver){
+                loginObservers[i] = null;
+                break;
+            }
+        }
+    }
+
+    public void notifyLoginObservers(){
+        for(int i=0;i<loginObservers.length;i++){
+            if(loginObservers[i]!=null){
+                loginObservers[i].loginSuccess();
             }
         }
     }

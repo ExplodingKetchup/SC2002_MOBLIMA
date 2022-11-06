@@ -35,11 +35,12 @@ public class SettingsController {
     public void manageSettings(String command) {
         String[] inputTokens = command.split(" ");
         if (inputTokens.length == 2) {
-            if (inputTokens[1].equals("-")) {
+            /*if (inputTokens[1].equals("-")) {
                 settings.remove(inputTokens[0]);
             } else {
                 settings.setProperty(inputTokens[0], inputTokens[1]);
-            }
+            }*/
+            settings.setProperty(inputTokens[0], inputTokens[1]);
             settings.save();
         } else {
             System.out.println("Invalid input.");

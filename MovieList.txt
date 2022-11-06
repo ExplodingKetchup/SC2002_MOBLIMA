@@ -1,5 +1,5 @@
-Name, Status, Director, Synopsis, Cast
+Name|Status|Director|Synopsis|Cast
 Iron Man|Showing|Jon Favreaue|After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.|Robert Downey Jr., Gwyneth Paltrow, Terrence Howard
-Avengers: Endgame|Showing|Jon Favreaue|After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.|Robert Downey Jr., Chris Evans, Mark Ruffalo
+Avengers: Endgame|Showing|Anthony Russo|After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.|Robert Downey Jr., Chris Evans, Mark Ruffalo
 A Walk to Remember|Showing|Adam Shankman|Two North Carolina teens, Landon Carter and Jamie Sullivan, are thrown together after Landon gets into trouble and is sentenced to perform community service.|Mandy Moore, Shane West, Peter Coyote
 HouseFull 2|Showing|Sajid Khan|A comedy of errors wherein four men help each other to fool their prospective father-in-laws creating a cascade of confusion and mayhem.|Akshay Kumar, John Abraham, Asin Thottumkal

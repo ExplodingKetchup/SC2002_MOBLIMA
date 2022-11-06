@@ -1,6 +1,7 @@
 package Moblima;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -27,11 +28,12 @@ public final class AdminForm extends Form {
      */
     public Object show() {
         exitFlag = false;
-        BookMyShowInterface BookMyShow = new BookMyShow();
+        //BookMyShowInterface BookMyShow = new BookMyShow();
         Scanner sc = new Scanner(System.in);
-        while (!exitFlag) {
+        int option;
+        do {
             System.out.println();
-            System.out.println("----------------MOBLIMA ADMIN MENU----------------");
+            System.out.println("-------------MOBLIMA ADMIN MAIN MENU--------------");
             System.out.println("| 01: Create Movie Listing                       |");
             System.out.println("| 02: Update Movie Listing                       |");
             System.out.println("| 03: Remove Movie Listing                       |");
@@ -40,47 +42,53 @@ public final class AdminForm extends Form {
             System.out.println("| 06: Update Movie Showtime                      |");
             System.out.println("| 07: Remove Movie Showtime                      |");
             System.out.println("| 08: Configure System Settings                  |");
-            System.out.println("| 09: Movie Goer View                            |");
-            System.out.println("| 10: Log out                                    |");
+            System.out.println("| 09: USER VIEW                                  |");
             System.out.println("--------------------------------------------------");
             System.out.println();
-            int choice = sc.nextInt();
-            switch (choice) {
-                case 1:
-                try {
-                    AdminView adminView = new AdminView();
-                    adminView.writeMovieToTextFile("MovieList.txt");
-                } catch (IOException e) {
-
-                }
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    BookMyShow.showAllMovies();
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    break;
-                case 8:
-                    admin.manageSettings();
-                    break;
-                case 9:
-                    MovieGoer movieGoer = new MovieGoer();
-                    break;
-                case 10:
-                    this.exit();
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-                    break;
+            System.out.print("Admin Main Menu - Enter option ('-1' to exit): ");
+            try {
+                option = sc.nextInt();
+            }catch(InputMismatchException e) {
+                System.out.println("Invalid Input. Please re-enter.");
+                sc.next();
+                continue;
             }
-        }
+            switch (option) {
+            case -1:
+                System.out.println("Goodbye!");
+                System.exit(0);
+                return null;
+            case 1:
+                admin.createMovie();
+                break;
+            case 2:
+                admin.updateMovie();
+                break;
+            case 3:
+                admin.removeMovie();
+                break;
+            case 4:
+                admin.showAllMovies();
+                break;
+            case 5:
+                admin.createShow();
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                admin.manageSettings();
+                break;
+            case 9:
+                admin.exit();
+                this.exit();
+                break;
+            default:
+                System.out.println("Invalid Input. Please re-enter.");
+                continue;
+            }
+        } while(!exitFlag);
         return null;
     }
 }

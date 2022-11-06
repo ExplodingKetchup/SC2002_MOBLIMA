@@ -5,7 +5,7 @@ public class Rating {
     private double rating;
     private User user;
 
-    Rating(double rating,User user) {
+    public Rating(double rating,User user) {
         this.rating = rating;
         this.user=user;
     }

@@ -2,7 +2,6 @@ package Moblima;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.Map;
 
 public class SeatHandler {
@@ -47,13 +46,36 @@ public class SeatHandler {
         
         System.out.println("Seats still available: ");
         int i = 0;
+        int x = 10;
 
+        if (seats.size() < 10){
+            x = seats.size();
+        }
+        while (i < x){
+            System.out.print("  ----   ");
+            i++;
+        }
+
+        System.out.println();
+        i = 0;
         for(Seats seat : seats){
-            System.out.print(seat.getSeat() + " ");
+            System.out.print("|  " + seat.getSeat() + "  | ");
             if((i+1) % 10 == 0 && i != 0){
                 System.out.println("");
+                i = 0;
+                while (i < 10){
+                    System.out.print("  ----   ");
+                    i++;
+                }
+                System.out.println();
+                
+                i = -1;
             }
             i++;
+        }
+        System.out.println();
+        for (int j = 0; j < i ; j++){
+            System.out.print("  ----   ");
         }
     }
 
@@ -72,7 +94,6 @@ public class SeatHandler {
 
     public boolean checkCapacity(int numOfTickets, Show s){
         if (numOfTickets > s.getAvailableSeats()){
-            System.out.println("Not enough tickets remaining");
             return false;
         }else{
             return true;
@@ -92,5 +113,16 @@ public class SeatHandler {
         }
 
         this.allSeats.put(s, allSeats);
+    }
+
+    public static boolean duplicateSeatInput(Seats s1, ArrayList<Seats> chosenSeats){
+        boolean duplicate = false;
+        for (Seats o : chosenSeats){
+            if (o.getSeat().equals(s1.getSeat())){
+                duplicate = true;
+                break;
+            }
+        }
+        return duplicate;
     }
 }

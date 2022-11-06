@@ -12,4 +12,7 @@ public class UserHandler {
 	public ArrayList<User> getUsers(){
 		return users;
 	}
+	public int getSize() {
+		return users.size()-1;
+	}
 }

@@ -6,10 +6,10 @@ public class User {
     private int id;
     private String name;
     private String email;
-    private double number;
+    private int number;
     public ArrayList<Ticket> bookingHistory;
 
-    public User(String name,String email,double number) {
+    public User(String name,String email, int number) {
         idCounter += 1;
         this.id = idCounter;
         this.name = name;
@@ -24,7 +24,10 @@ public class User {
     public String getEmail() {
         return email;
     }
-    public double getNumber() {
+    public int getNumber() {
         return number;
+    }
+    public ArrayList<Ticket> getTickets(){
+    	return bookingHistory;
     }
 }

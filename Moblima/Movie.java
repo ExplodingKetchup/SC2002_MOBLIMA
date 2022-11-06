@@ -130,8 +130,8 @@ public class Movie  {
 	    
 	    public double getAverageRatings() {
 	    	Ratings=0;
-	    	if(ratings.size()==0) {
-	    		return Ratings;
+	    	if(ratings.size()<=1) {
+	    		return -1;
 	    	}
 	    	else {
 	    		for (Rating temp : ratings) {

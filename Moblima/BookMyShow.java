@@ -44,7 +44,7 @@ public class BookMyShow implements BookMyShowInterface{
         //Movie ironMan = new Movie("Iron Man","showing","Jon Favreaue", movieHandler);
         //Movie avengers = new Movie("Avengers: End Game", "showing","Jon Favreaue", movieHandler);
 
-		Movie ironMan = new Movie("Iron Man","showing","Jon Favreaue","AAA", "Example Cast...", movieHandler);
+		Movie ironMan = new Movie("Iron Man 2","showing","Jon Favreaue","AAA", "Example Cast...", movieHandler);
         Movie avengers = new Movie("Avengers: End Game", "showing","Jon Favreaue","BBB", "Example Cast...", movieHandler);
         String dateInString = "Friday, Jun 7, 2020 09:00:00 AM";
 		try {
@@ -296,16 +296,30 @@ public class BookMyShow implements BookMyShowInterface{
 		System.out.println("Sort Movies by: 1.Ticket sales, 2.Ratings");
 		int sort = scanner.nextInt();
         scanner.nextLine();
+        int count =1;
         if(sort==1) {
         	movieHandler.sortByTicketSales();
+        	for (Movie temp : movieHandler.getMovie()) {
+				System.out.print(count+": ");
+				System.out.print(temp);
+				System.out.println("Ticket Sales: "+temp.getTicketsSize());
+				count++;
+        	}
         }
-        else {movieHandler.sortByRatings();}
-		int count =1;
-		for (Movie temp : movieHandler.getMovie()) {
-			System.out.print(count+": ");
-			System.out.println(temp);
-			count++;
-		}
+        else {
+        	movieHandler.sortByRatings();
+        	for (Movie temp : movieHandler.getMovie()) {
+    			System.out.print(count+": ");
+    			System.out.print(temp);
+    			if (temp.getAverageRatings() == -1)
+    				System.out.println("Rating: NA");
+    			else 
+    				System.out.println("Rating: "+temp.getAverageRatings());
+    			count++;
+        	}
+        }
+		
+		
 	}
 
 	public void searchMovie(String searchString) {
@@ -314,7 +328,10 @@ public class BookMyShow implements BookMyShowInterface{
 			if(temp.getName().contentEquals(searchString)) {
 				System.out.println(temp);
 				System.out.print("Average Movie Rating: ");
-				System.out.println(temp.getAverageRatings());
+				if (temp.getAverageRatings() == -1)
+					System.out.println("NA");
+				else
+					System.out.println(temp.getAverageRatings());
 				System.out.println("Most Recent Reviews:");
 				System.out.println(temp.getReview());
 			}
